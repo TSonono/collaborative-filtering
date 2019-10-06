@@ -24,19 +24,45 @@ var math = require('mathjs')
  * If the user has not rated that item, the value should be 0. If the user 
  * liked the item, it should be a 1. If disliked, a -1. Dislikes should be 
  * implemented last.
- * @returns {array} A one-dimensional array of recommendations in descending order
+ * @returns {array} A two-dimensional array for the normalized co occurrence 
+ * matrix
  */
-function collaborative_filter(ratings) {
+function collaborativeFilter(ratings) {
     if (!Array.isArray(ratings)) return false;
     numUsers = ratings.length
     numItems = ratings[0].length
 
-    var co_occurrence_matrix = create_co_occurrence_matrix(ratings, numUsers, numItems)
+    let coOccurrenceMatrix = createCoOccurrenceMatrix(ratings, numUsers, numItems)
+    normalizedMatrix = normalizeCoOccurrenceMatrix(coOccurrenceMatrix)
 
-
-    return true
+    return normalizedMatrix
 }
 
+/**
+ * Generate recommendations for a user.
+ * TODO: Finish implementation...
+ *         //Algorithm: 
+ *        Retrieve rated items for a given user.
+ *        For each rated item:
+ *            In the (normalized) co-occurrence matrix, sum each column to a new array
+ *        Sort the array in descending order (keep track of the initial indices)
+ * 
+ * @param {array} ratings Same definition as in the collaborativeFilter function.
+ * @param {array} coOccurrenceMatrix A co-occurrence matrix
+ * @param {number} userIndex The index of the user you want to know which items
+ * he or she has rated.
+ * @param {number} numItems The number of items which have been rated.
+ * @returns {array} An array 
+ */
+function getRecommendations(ratings, coOccurrenceMatrix, userIndex, numItems) {
+    if (!Array.isArray(ratings)) return false;
+
+    let ratedItemsForUser = getRatedItemsForUser(ratings, userIndex, numItems)
+    for (let index = 0; index < ratedItemsForUser.length; index++) {
+        const element = ratedItemsForUser[index];
+        
+    }
+}
 
 // Local functions
 
@@ -45,12 +71,12 @@ function collaborative_filter(ratings) {
  * 
  * TODO: Consider removal of mathJS if we can generate zeroes without it
  * 
- * @param {array} ratings Same definition as in the collaborative_filter function.
+ * @param {array} ratings Same definition as in the collaborativeFilter function.
  * @returns {array} A two-dimensional co-occurrence matrix with size X x X (X
  * being the number of items that have received at least one rating. The
  * diagonal from left to right should consist of only zeroes.
  */
-function create_co_occurrence_matrix(ratings, nUsers, nItems) {
+function createCoOccurrenceMatrix(ratings, nUsers, nItems) {
     
     const matrix = math.zeros(nItems, nItems)
     for (let index_y = 0; index_y < nUsers; index_y++) {
@@ -69,7 +95,39 @@ function create_co_occurrence_matrix(ratings, nUsers, nItems) {
     return matrix.toArray()
 }
 
+/**
+ * Normalizes a co-occurrence matrix based on popularity.
+ * TODO: Implement...
+ * 
+ * @param {array} matrix A co-occurrence matrix
+ * @returns {array} A normalized co-occurrence matrix
+ */
+function normalizeCoOccurrenceMatrix(matrix) {
+    return matrix
+}
+
+/**
+ * Extract which items have a rating for a given user.
+ * 
+ * @param {array} ratings The ratings of all the users
+ * @param {number} userIndex The index of the user you want to know which items
+ * he or she has rated.
+ * @param {number} numItems The number of items which have been rated.
+ * @returns {array} An array of indices noting what games which have been rated.
+ */
+function getRatedItemsForUser(ratings, userIndex, numItems) {
+
+    let ratedItems = []
+    for (let index = 0; index < numItems; index++) {
+        if (ratings[userIndex][index] !== 0) {
+            ratedItems.push(index)
+        }
+    }
+    return ratedItems
+}
+
 // Export API functions
 module.exports = {
-    filter: collaborative_filter
+    cfFilter: collaborativeFilter,
+    getRecommendations: getRecommendations
 };
