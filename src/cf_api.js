@@ -32,10 +32,10 @@ function collaborativeFilter(ratings) {
     numUsers = ratings.length
     numItems = ratings[0].length
 
-    let coOccurrenceMatrix = createCoOccurrenceMatrix(ratings, numUsers, numItems)
-    normalizedMatrix = normalizeCoOccurrenceMatrix(coOccurrenceMatrix)
+    let coMatrix = createCoMatrix(ratings, numUsers, numItems)
+    console.log(coMatrix)
 
-    return normalizedMatrix
+    return coMatrix
 }
 
 /**
@@ -48,13 +48,13 @@ function collaborativeFilter(ratings) {
  *        Sort the array in descending order (keep track of the initial indices)
  * 
  * @param {array} ratings Same definition as in the collaborativeFilter function.
- * @param {array} coOccurrenceMatrix A co-occurrence matrix
+ * @param {array} coMatrix A co-occurrence matrix
  * @param {number} userIndex The index of the user you want to know which items
  * he or she has rated.
  * @param {number} numItems The number of items which have been rated.
  * @returns {array} An array 
  */
-function getRecommendations(ratings, coOccurrenceMatrix, userIndex, numItems) {
+function getRecommendations(ratings, coMatrix, userIndex, numItems) {
     if (!Array.isArray(ratings)) return false;
 
     let ratedItemsForUser = getRatedItemsForUser(ratings, userIndex, numItems)
@@ -69,16 +69,18 @@ function getRecommendations(ratings, coOccurrenceMatrix, userIndex, numItems) {
 /**
  * Generates a co-occurrence matrix based on the input from the ratings param.
  * 
- * TODO: Consider removal of mathJS if we can generate zeroes without it
  * 
  * @param {array} ratings Same definition as in the collaborativeFilter function.
  * @returns {array} A two-dimensional co-occurrence matrix with size X x X (X
  * being the number of items that have received at least one rating. The
  * diagonal from left to right should consist of only zeroes.
  */
-function createCoOccurrenceMatrix(ratings, nUsers, nItems) {
+function createCoMatrix(ratings, nUsers, nItems) {
     
-    const matrix = math.zeros(nItems, nItems)
+    const coMatrix = math.zeros(nItems, nItems)
+    //const normalizerMatrix = math.zeros(nItems, nItems)
+    const normalizerMatrix = math.identity(nItems)
+
     for (let index_y = 0; index_y < nUsers; index_y++) {
         // User
         for (let index_x = 0; index_x < (nItems - 1); index_x++) {
@@ -86,24 +88,30 @@ function createCoOccurrenceMatrix(ratings, nUsers, nItems) {
             for (let index = index_x + 1; index < nItems; index++) {
                 // Co-occurrence
                 if (ratings[index_y][index_x] === 1 && ratings[index_y][index] === 1) {
-                    matrix.set([index_x, index], matrix.get([index_x, index]) + 1)
-                    matrix.set([index, index_x], matrix.get([index, index_x]) + 1)
+                    coMatrix.set([index_x, index], coMatrix.get([index_x, index]) + 1)
+                    coMatrix.set([index, index_x], coMatrix.get([index, index_x]) + 1)  // mirror
+                }
+                if (ratings[index_y][index_x] === 1 || ratings[index_y][index] === 1) {
+                    normalizerMatrix.set([index_x, index], normalizerMatrix.get([index_x, index]) + 1)
+                    normalizerMatrix.set([index, index_x], normalizerMatrix.get([index, index_x]) + 1)  // mirror
                 }
             }
         }
     }
-    return matrix.toArray()
+    return normalizeCoMatrix(coMatrix, normalizerMatrix)
 }
 
 /**
  * Normalizes a co-occurrence matrix based on popularity.
- * TODO: Implement...
+ * TODO: Error check (size)
  * 
- * @param {array} matrix A co-occurrence matrix
+ * @param {array} coMatrix A co-occurrence matrix
+ * @param {array} normalizerMatrix A matrix with division factors for the
+ * coMatrix. Should be the same size as coMatrix
  * @returns {array} A normalized co-occurrence matrix
  */
-function normalizeCoOccurrenceMatrix(matrix) {
-    return matrix
+function normalizeCoMatrix(coMatrix, normalizerMatrix) {
+    return math.dotDivide(coMatrix, normalizerMatrix)
 }
 
 /**
