@@ -1,6 +1,6 @@
 {
   "name": "collaborative-filter",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "A lightweight implementation of collaborative filtering.",
   "repository": {
     "type": "git",
@@ -10,8 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["statistics", "collaborative-filtering", "node-js", "recommendation-engine"],
+  "author": "Tofik Sonono",
   "license": "MIT",
   "dependencies": {
     "mathjs": "^6.2.3"
