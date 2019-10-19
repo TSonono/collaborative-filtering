@@ -1,8 +1,8 @@
 {
-  "name": "node-playground",
-  "version": "1.0.0",
+  "name": "collaborative-filter",
+  "version": "1.0.0-alpha.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/cf_api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mathjs": "^6.2.3",
-    "recommender": "^3.0.0"
+    "mathjs": "^6.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }
