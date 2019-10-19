@@ -6,6 +6,6 @@ const ratings = [
   [1, 0, 0],
 ];
 
-const a = recommendations.filter(ratings);
+const a = recommendations.filter(ratings, 2);
 
-console.log(recommendations.getRecommendations(ratings, a, 2));
+console.log(a);
