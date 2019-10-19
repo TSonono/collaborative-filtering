@@ -7,6 +7,5 @@ const ratings = [
 ];
 
 const a = recommendations.filter(ratings);
-console.log(a);
 
-recommendations.getRecommendations(ratings, a, 1);
+console.log(recommendations.getRecommendations(ratings, a, 2));
