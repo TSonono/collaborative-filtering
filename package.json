@@ -1,7 +1,11 @@
 {
   "name": "collaborative-filter",
-  "version": "1.0.0-alpha.0",
-  "description": "",
+  "version": "1.0.0-alpha.2",
+  "description": "A lightweight implementation of collaborative filtering.",
+  "repository": {
+    "type": "git",
+    "url": "git:github.com/TSonono/collaborative-filtering"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
