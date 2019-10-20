@@ -4,7 +4,7 @@
 
 ## Features
 
-- Generate recommendations for a user based on user's with a similar taste.
+- Generate recommendations for a user based on users with a similar taste.
 - No popularity bias (normalization based on popularity).
 - Currently only supports likes (no dislikes).
 - Database agnostic. As long as you are running Node.js, you can use this API.
@@ -39,11 +39,11 @@ node examples/demo.js
 The input for the engine is an array matrix which defines the ratings of the users in the database. It should be a matrix containing of 0:s (not rated) and 1:s (liked the item) and follow this format.
 
 ```
-     I1 I2 I3 . . .
+     I0 I1 I2 . . .
     [
-U1  [1  1  1  .  .  .],
-U2  [1  0  1  .  .  .],
-U3  [1  0  0  .  .  .],
+U0  [1  1  1  .  .  .],
+U1  [1  0  1  .  .  .],
+U2  [1  0  0  .  .  .],
 .   [.  .  .  .  .  .],
 .   [.  .  .  .  .  .],
 .   [.  .  .  .  .  .],
@@ -73,12 +73,12 @@ const recommendations = require('../lib/cf_api.js');
 const coMatrix = createCoMatrix(ratings, numUsers, numItems);
 const result = getRecommendations(ratings, coMatrix, userIndex);
 ```
-which results in the same array as before. This could be useful when you do not need to generate the co-occurrence matrix multiple times. For instance, if you want recommendations for multiple users, you do not need to generate the co-occurrence matrix multiple times,saving you processing time.
+which results in the same array as before. This could be useful when you do not need to generate the co-occurrence matrix multiple times. For instance, if you want recommendations for multiple users, you do not need to generate the co-occurrence matrix multiple times, saving you processing time.
 
 
 ## Contributing
 
-This API is far from done. It currently lacks support for dislikes and other rating scales. The plan is to improve it in the future! You can also submit a pull request if you want to contribute! We follow the Airbnb JavaScript Style Guide.
+This API is far from done. It currently lacks support for dislikes and other rating scales. The plan is to improve it in the future. You can also submit a pull request if you want to contribute! We follow the Airbnb JavaScript Style Guide.
 
 ## License
 

@@ -1,6 +1,6 @@
 {
   "name": "collaborative-filter",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "description": "A lightweight implementation of collaborative filtering.",
   "repository": {
     "type": "git",
