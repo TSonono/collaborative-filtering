@@ -1,6 +1,6 @@
 # Collaborative filtering for Node.js
 
-> This API is a lightweight implementation of collaborative filtering for Node.js. The only dependency is Math.js. Currently it supports generating recommendations with Jaccard similarity.
+> This API is a lightweight implementation of collaborative filtering for Node.js. The only dependency is [Math.js](https://www.npmjs.com/package/mathjs). Currently it supports generating recommendations with Jaccard similarity.
 
 ## Features
 
@@ -11,12 +11,12 @@
 
 ## Requirements
 
-- Node.js
+- [Node.js](https://nodejs.org/en/)
 
 ## Install
 
 ```
-npm install collaborative-filter
+npm i collaborative-filter
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ npm install collaborative-filter
 In your project, simply include the module.
 
 ```javascript
-const rec = require('collaborative-filter')
+const recommend = require('collaborative-filter')
 ```
 
 
@@ -59,22 +59,29 @@ U2  [1  0  0  .  .  .],
  ```
  If you want to run the whole collaborative filter, you would do this:
  ```javascript
- const recommendations = require('../lib/cf_api.js');
+ const recommend = require('../lib/cf_api.js');
 
- const result = recommendations.filter(ratings, 2);
+ const result = recommend.filter(ratings, 2);
  ```
 where 2 is the user index. The output of this with ratings matrix as above, would be an array `[2, 1]`. This tells us that item 2 is the most appropriate recommendation followed by item 2.
 
 You could also run the filtering process by calling the global API functions individually.
 
 ```javascript
-const recommendations = require('../lib/cf_api.js');
+const recommend = require('collaborative-filter');
 
-const coMatrix = createCoMatrix(ratings, numUsers, numItems);
-const result = getRecommendations(ratings, coMatrix, userIndex);
+const coMatrix = recommend.createCoMatrix(ratings, numUsers, numItems);
+const result = recommend.getRecommendations(ratings, coMatrix, userIndex);
 ```
 which results in the same array as before. This could be useful when you do not need to generate the co-occurrence matrix multiple times. For instance, if you want recommendations for multiple users, you do not need to generate the co-occurrence matrix multiple times, saving you processing time.
 
+## Cold Start Problem
+
+The [Cold start problem](https://en.wikipedia.org/wiki/Cold_start_(computing)) is something that can make or break a recommendation application. If you don't have enough data, it's hard to draw any conclusions, especially if the number of items is large.
+
+In the file `cf_api.js` in the `lib` directory, there is a flag `ONLY_RECOMMEND_FROM_SIMILAR_TASTE`. If you put this to 0, you will get recommendations from users which don't necessarily have similar taste as you (these will however be lower ranked than recommendations from people with similar taste). This option is available if you consider a cold start something that will make your service seem poor. With this flag enabled, you will never receive a recommendation from someone who has no similarity with you.
+
+You can also disable the `NORMALIZE_ON_POPULARITY` flag, which in turn ensures that the co-occurrence matrix is not normalized.
 
 ## Contributing
 
