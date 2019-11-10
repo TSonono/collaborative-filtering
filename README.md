@@ -78,7 +78,7 @@ which results in the same array as before. This could be useful when you do not 
 
 ## Contributing
 
-This API is far from done. It currently lacks support for dislikes and other rating scales. The plan is to improve it in the future. You can also submit a pull request if you want to contribute! We follow the Airbnb JavaScript Style Guide.
+This API is far from done. It currently lacks support for dislikes and other rating scales. Furthermore, we need unit tests to confirm functionality of the engine. The plan is to improve it in the future. You can also submit a pull request if you want to contribute! We follow the Airbnb JavaScript Style Guide.
 
 ## License
 
