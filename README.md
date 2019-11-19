@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.com/TSonono/collaborative-filtering.svg?branch=master)](https://travis-ci.com/TSonono/collaborative-filtering)
-[![npm version](https://badge.fury.io/js/collaborative-filter.svg)](https://badge.fury.io/js/collaborative-filter)
+[![Coverage](https://codecov.io/gh/TSonono/collaborative-filtering/branch/master/graph/badge.svg)](https://codecov.io/gh/TSonono/collaborative-filtering)
+[![Dependencies](https://david-dm.org/TSonono/collaborative-filtering.svg)](https://david-dm.org/TSonono/collaborative-filtering)
+[![npm version](https://badge.fury.io/js/collaborative-filter.svg)](https://www.npmjs.com/package/collaborative-filter)
+[![Downloads](https://img.shields.io/npm/dt/collaborative-filter)](https://npm-stat.com/charts.html?package=collaborative-filter&from=2019-08-01)
 
 # Collaborative filtering for Node.js
 
