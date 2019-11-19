@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/TSonono/collaborative-filtering.svg?branch=master)](https://travis-ci.com/TSonono/collaborative-filtering)
+[![npm version](https://badge.fury.io/js/collaborative-filter.svg)](https://badge.fury.io/js/collaborative-filter)
 
 # Collaborative filtering for Node.js
 
