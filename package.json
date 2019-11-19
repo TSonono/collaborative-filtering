@@ -1,6 +1,6 @@
 {
   "name": "collaborative-filter",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.12",
   "description": "A lightweight implementation of collaborative filtering.",
   "repository": {
     "type": "git",
@@ -8,9 +8,14 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha"
   },
-  "keywords": ["statistics", "collaborative-filtering", "node-js", "recommendation-engine"],
+  "keywords": [
+    "statistics",
+    "collaborative-filtering",
+    "node-js",
+    "recommendation-engine"
+  ],
   "author": "Tofik Sonono",
   "license": "MIT",
   "dependencies": {
@@ -19,6 +24,8 @@
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
   }
 }
