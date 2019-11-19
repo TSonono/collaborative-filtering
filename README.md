@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/TSonono/collaborative-filtering.svg?branch=master)](https://travis-ci.com/TSonono/collaborative-filtering)
+
 # Collaborative filtering for Node.js
 
 > This API is a lightweight implementation of collaborative filtering for Node.js. The only dependency is [Math.js](https://www.npmjs.com/package/mathjs). Currently it supports generating recommendations with Jaccard similarity.
