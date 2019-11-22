@@ -6,6 +6,6 @@ const ratings = [
   [1, 0, 0],
 ];
 
-const a = recommendations.filter(ratings, 2);
+const a = recommendations.cFilter(ratings, 2);
 
 console.log(a);

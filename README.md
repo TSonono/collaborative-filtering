@@ -67,7 +67,7 @@ U2  [1  0  0  .  .  .],
  ```javascript
  const recommend = require('../lib/cf_api.js');
 
- const result = recommend.filter(ratings, 2);
+ const result = recommend.CFilter(ratings, 2);
  ```
 where 2 is the user index. The output of this with ratings matrix as above, would be an array `[2, 1]`. This tells us that item 2 is the most appropriate recommendation followed by item 1.
 
@@ -91,7 +91,12 @@ You can also disable the `NORMALIZE_ON_POPULARITY` flag, which in turn ensures t
 
 ## Contributing
 
-This API is far from done. It currently lacks support for dislikes and other rating scales. Furthermore, we need unit tests to confirm functionality of the engine. The plan is to improve it in the future. You can also submit a pull request if you want to contribute! We follow the Airbnb JavaScript Style Guide.
+Submit a pull request if you want to contribute. We follow the Airbnb JavaScript Style Guide.
+
+# Todo
+- Rating scale options and implementations
+- Performance benchmarks
+- Convert to typescript?
 
 ## License
 
