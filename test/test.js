@@ -91,10 +91,10 @@ describe('D2 tests', function() {
             const recommendations = recommend.getRecommendations(databases.notSimple, coOccurrenceMatrix, 6);
             it('The highest ranked recommendation for U6 should be I1', function() {
                 assert.equal(recommendations[0], 1);
-            })
+            });
             it('The lowest ranked recommendation for U6 should be I11', function() {
                 assert.equal(recommendations[recommendations.length - 1], 11);
-            })
+            });
         })
         describe('Recommendations for U0', function() {
             const recommendations = recommend.getRecommendations(databases.notSimple, coOccurrenceMatrix, 0);
@@ -103,11 +103,50 @@ describe('D2 tests', function() {
                 assert.ok([14, 15, 16, 17].includes(recommendations[1]));
                 assert.ok([14, 15, 16, 17].includes(recommendations[2]));
                 assert.ok([14, 15, 16, 17].includes(recommendations[3]));
-            })
+            });
             it('The recommendations with rank 5 for U0 should be I11', function() {
                 assert.equal(recommendations[4], 11);
-            })
-        })
+            });
+            it('The number of recommendations for U0 should be 5', function() {
+                assert.equal(recommendations.length, 5);
+            });
+        });
+        describe('Recommendations for U9', function() {
+            const recommendations = recommend.getRecommendations(databases.notSimple, coOccurrenceMatrix, 9);
+            it('The only recommendation for U9 should be I12', function() {
+                assert.equal(recommendations[0], 12);
+                assert.equal(recommendations.length, 1);
+            });
+        });
+        describe('Recommendations for U1', function() {
+            const recommendations = recommend.getRecommendations(databases.notSimple, coOccurrenceMatrix, 1);
+            it('The number of recommendations for U1 should be 12', function() {
+                assert.equal(recommendations.length, 12);
+            });
+            it('The recommendations with rank 1 for U1 should be I18', function() {
+                assert.equal(recommendations[0], 18);
+            });
+            it('The recommendations with rank 2-8 should be (I0, I2-I10) in no specific order', function() {
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[1]));
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[2]));
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[3]));
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[4]));
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[5]));
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[6]));
+                assert.ok([0, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(recommendations[7]));
+            });
+            it('The recommendations with rank 9-12 should be (I14-I17) in no specific order', function() {
+                assert.ok([14, 15, 16, 17].includes(recommendations[8]));
+                assert.ok([14, 15, 16, 17].includes(recommendations[9]));
+                assert.ok([14, 15, 16, 17].includes(recommendations[10]));
+                assert.ok([14, 15, 16, 17].includes(recommendations[11]));
+
+            });
+            it('The number of recommendations for U1 should be 12', function() {
+                assert.equal(recommendations.length, 12);
+            });
+
+        });
     });
 });
 
