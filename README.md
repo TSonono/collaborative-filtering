@@ -67,7 +67,7 @@ U2  [1  0  0  .  .  .],
  ```javascript
  const recommend = require('../lib/cf_api.js');
 
- const result = recommend.CFilter(ratings, 2);
+ const result = recommend.cFilter(ratings, 2);
  ```
 where 2 is the user index. The output of this with ratings matrix as above, would be an array `[2, 1]`. This tells us that item 2 is the most appropriate recommendation followed by item 1.
 
